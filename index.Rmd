@@ -1,0 +1,45 @@
+--- 
+title: "Light-level geolocation analysis"
+author: "Simeon Lisovski, Martins Briedis, Kiran Danjahl-Adams, Lykke Pedersen, Sarah Davidson, ..., Michael T. Hallworth, Michael Sumner, Simon Wotherspoon, Eli Bridge (201X) The Nuts and Bolts of Light-Level Geolocation Analyses. Journal X:xxx-xxx. DOI:00000.00"
+knit: "bookdown::render_book"
+documentclass: krantz
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+fontsize: 12pt
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+site: bookdown::bookdown_site
+description: "How to analyze light-level geolocator tracking data for studies of birds."
+cover-image: Images/front.png
+---
+
+# Preface {-}
+
+```{r fig.align='center', echo=FALSE, include=identical(knitr:::pandoc_to(), 'html')}
+knitr::include_graphics('Images/front.png', dpi = NA)
+```
+
+
+Geolocation by light is a method of animal tracking that uses small, light-detecting data loggers (i.e. geolocators) to determine the locations of animals based on the light environment they move through. Technological and fieldwork issues aside, effective use of light level geolocation requires translation of a time series of light levels into geographical locations. Geographical locations derived from light-level data are subject to error that derives directly from noise in the light-level data, i.e. unpredictable shading of the light sensor due to weather or the habitat [@Lisovski2012]. Although light-level geolocation has provided a wealth of new insights into the annual movements of hundreds of bird species, researchers invariably struggle with the analytical steps needed to obtain location estimates, interpret them, present their results, and document what they have done.
+
+This manual has been written by some of the leading experts in geolocator analysis and is based on material created to run multiple international workshops. Thus, it pools code and experience gathered over the last decade. We hope that this collection of analysis using different open source software tools (R packages) helps both, newcomers and experienced users of light-level geolocation.
+
+## Sturcture of the manual {-}
+
+This manual should allow users with very limited knowledge in R coding to perform a state-of-the-art analysis of geolocator data. Thus, we start with the very basics of loading packges \@ref(start) and data \@ref(loadingData) and go into more detail along the way. Starting with twiligth annotation \@ref(twilight) we go into the different packages, illustrate the general workflow using example data and discuss potential pitfalls and provide some recommendations. While there are more R packages available [see: @Merkel2016], we focus on the most freuqently used tools such as GeoLight \@ref(GeoLight), probGLS \@ref(probGLS), SGAT \@ref(SGAT) and FLightR \@ref(FLightR). Furthermore, we provide code and ideas on simple representation of the results \@ref(presentation) and discuss Movebank as a data repository for geolocator tracks \@ref(movebank),
+
+
+## Acknowledgements {-}
+
+We want ot acknowledge ... please add.
+
+* Swiss National Science Foundation & Swiss Ornithological Insitute: Workshop at Rigi
+* NCEAS: Workshop Santa Barbara
+* Migrate Technology: Support for workshops
+
+<img src="Images/newLogo_0.png" width = 390/> <img src="Images/snf.gif" width = 360/>
+ <img src="Images/MT_logo.gif" width = 340/> <img src="Images/SwissOrnInst.png" width = 380/>

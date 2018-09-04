@@ -1,0 +1,33 @@
+# Loading data into R {#loadingData}
+
+here are a few functions to read light-level data from different tag types into R. The type of file that you have will determine which function you use. If you have `.lig` from British Antarctic Survey or BioTrack you use the `readLig` found in the `TwGeos` package. For the `GeoLight` and the `SGAT` analyses we will use a tag developed by the Swiss Ornithological Institute that was deployed on a Bee-eather in 2014/2015. For the `FLightR` analysis we will use recordings from an `Integio` logger developped by `Migrate Technology Ltd` that was deployed on a ...
+
+
+```{r}
+ID <- "14SA"
+wd <- "Main"
+Species <- "MerApi"
+AnalCode <- "R1"
+
+lon.calib <- 11.96
+lat.calib <- 51.32
+
+
+raw <- glfTrans(paste0("Data/RawData/", Species, "/", ID, ".glf"))
+  names(raw) <- c("Date", "Light")
+  raw$Light  <- log(raw$Light+0.0001) + abs(min(log(raw$Light+0.0001)))
+head(raw)
+```
+
+No matter how the data is read in and what tag type has been used the output needs to have at least two columns (note that names can be slightly different):
+
+1. datetime
+2. light
+
+and these columns need to be in a specific format with datetime beeing a `POSIX.` class and light beeing numeric intergers.
+
+```{r}
+str(raw)
+```
+
+also note, that some ligth values should be log-transformed while some data is already on a log scale (e.g. .lig files).
