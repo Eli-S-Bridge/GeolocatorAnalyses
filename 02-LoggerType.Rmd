@@ -1,0 +1,14 @@
+# The Datasets {#datasets}
+
+To illustrate the capabilities of the different packages, discuss the potential pitfalls and provide some recommendations, we will use raw geolocator data from three individuals of different species.
+The data is publised on Movebank \@ref{movebank} and can be downloaded directly using the R package _move_ (to be done and to be tested!).
+
+TagID   |  Species           |   Tag type                            | Movebank information
+------  | ---------          | -----------------------------------   | ---------------------
+M034    | Red-backed Shrike  | Integio (Movement Technology Ltd.)    | TBA
+xxx     | European bee-eater | PAM (Swiss Ornithological Institute)  | TAB
+xxx     | xx Bunting         | Eli                                   | TAB
+
+* Differences
+* Recording/measurement frequency
+* Sensitivity

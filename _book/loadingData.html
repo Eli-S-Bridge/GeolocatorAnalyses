@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Light-level geolocation analysis</title>
   <meta name="description" content="How to analyze light-level geolocator tracking data for studies of birds.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Light-level geolocation analysis" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="start.html">
+<link rel="prev" href="datasets.html">
 <link rel="next" href="twilight.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -107,14 +107,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>1</b> Getting started</a></li>
-<li class="chapter" data-level="2" data-path="loadingData.html"><a href="loadingData.html"><i class="fa fa-check"></i><b>2</b> Loading data into R</a></li>
-<li class="chapter" data-level="3" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>3</b> Twilight Annotation</a></li>
-<li class="chapter" data-level="4" data-path="GeoLight.html"><a href="GeoLight.html"><i class="fa fa-check"></i><b>4</b> GeoLight</a></li>
-<li class="chapter" data-level="5" data-path="probGLS.html"><a href="probGLS.html"><i class="fa fa-check"></i><b>5</b> probGLS</a></li>
-<li class="chapter" data-level="6" data-path="SGAT.html"><a href="SGAT.html"><i class="fa fa-check"></i><b>6</b> SGAT</a></li>
-<li class="chapter" data-level="7" data-path="FLightR.html"><a href="FLightR.html"><i class="fa fa-check"></i><b>7</b> FLightR</a></li>
-<li class="chapter" data-level="8" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>8</b> Presentation of results</a></li>
-<li class="chapter" data-level="9" data-path="movebank.html"><a href="movebank.html"><i class="fa fa-check"></i><b>9</b> Movemebank</a></li>
+<li class="chapter" data-level="2" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>2</b> The Datasets</a></li>
+<li class="chapter" data-level="3" data-path="loadingData.html"><a href="loadingData.html"><i class="fa fa-check"></i><b>3</b> Loading data into R</a></li>
+<li class="chapter" data-level="4" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>4</b> Twilight Annotation</a></li>
+<li class="chapter" data-level="5" data-path="GeoLight.html"><a href="GeoLight.html"><i class="fa fa-check"></i><b>5</b> GeoLight</a></li>
+<li class="chapter" data-level="6" data-path="probGLS.html"><a href="probGLS.html"><i class="fa fa-check"></i><b>6</b> probGLS</a></li>
+<li class="chapter" data-level="7" data-path="SGAT.html"><a href="SGAT.html"><i class="fa fa-check"></i><b>7</b> SGAT</a></li>
+<li class="chapter" data-level="8" data-path="FLightR.html"><a href="FLightR.html"><i class="fa fa-check"></i><b>8</b> FLightR</a></li>
+<li class="chapter" data-level="9" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>9</b> Presentation of results</a></li>
+<li class="chapter" data-level="10" data-path="movebank.html"><a href="movebank.html"><i class="fa fa-check"></i><b>10</b> Movemebank</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -134,7 +135,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="loadingData" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Loading data into R</h1>
+<h1><span class="header-section-number">Chapter 3</span> Loading data into R</h1>
 <p>here are a few functions to read light-level data from different tag types into R. The type of file that you have will determine which function you use. If you have <code>.lig</code> from British Antarctic Survey or BioTrack you use the <code>readLig</code> found in the <code>TwGeos</code> package. For the <code>GeoLight</code> and the <code>SGAT</code> analyses we will use a tag developed by the Swiss Ornithological Institute that was deployed on a Bee-eather in 2014/2015. For the <code>FLightR</code> analysis we will use recordings from an <code>Integio</code> logger developped by <code>Migrate Technology Ltd</code> that was deployed on a …</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ID &lt;-<span class="st"> &quot;14SA&quot;</span>
 wd &lt;-<span class="st"> &quot;Main&quot;</span>
@@ -174,7 +175,7 @@ raw &lt;-<span class="st"> </span><span class="kw">glfTrans</span>(<span class="
           </div>
         </div>
       </div>
-<a href="start.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="datasets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="twilight.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

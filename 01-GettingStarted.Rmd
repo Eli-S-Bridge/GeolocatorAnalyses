@@ -1,13 +1,15 @@
 # Getting started {#start}
 
-To analyse light-level geolocator data in R we need a couple of R packages as well as functions that allow to run our code. We created a package called _GeoLocTools_ that will be updated frequently. This package contains usefull functions that will be discussed in this manual but can also runs a check on you system (_setupGeolocation()_), detecting packages that are already installed and installs the missing tools directly from CRAN or GitHub.
+To analyse light-level geolocator data in R we need a couple of R packages as well as functions that allow to run our code. We created a package called _GeoLocTools_ that contains functions that are not nessesarily associated to a certain package put are used in this manual. Importantly the package can also runs a check on you system (function: _setupGeolocation()_), detecting packages that are already on your computer and installs the missing tools directly from CRAN or GitHub.
+
+The package requires _devtools_ (install if nessesary using the _install.packages()_ function). With _devtools_ on your system, you are able to download and built as well as install R packages directly from GitHub (e.g. _GeoLocTools_).
 
 ```{r eval = FALSE}
 library(devtools)
-# install_github("SLisovski/GeoLocTools") # to be done!
+install_github("SLisovski/GeoLocTools")
 ```
 
-While the code above needs to be done only once (and after updates of the `GeoLocTools`package - check for new versions), loading the package into R needs to be done every time and ensures that you can start your analysis streight away:
+You are know able to load the package and run the _setupGeolocation()_ function. We recommend to include this line at the beginning of each script you create for a geolocator analysis. Also check (every know and then), if there is a new version of _GeoLicTools_ available. And if that is the case re-install the package using the same code you used for initial installation.
 
 ```{r, message=FALSE, warning=FALSE}
 library(GeoLocTools)
@@ -15,3 +17,10 @@ setupGeolocation()
 ``` 
 
 if you see "You are all set!" in your console, the function ran succesfully and you are able to proceed.
+
+Amongst other dependencies, the following packages are loaded by this function:
+
+CRAN: geosphere, maptols, raster, MASS, rgdal
+
+GitHub: twGeos, GeoLight, probGLS, SGAT, FLightR
+

@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="acknowledgements.html">
-<link rel="next" href="datasets.html">
+<link rel="prev" href="start.html">
+<link rel="next" href="loadingData.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -134,19 +134,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="start" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Getting started</h1>
-<p>To analyse light-level geolocator data in R we need a couple of R packages as well as functions that allow to run our code. We created a package called <em>GeoLocTools</em> that contains functions that are not nessesarily associated to a certain package put are used in this manual. Importantly the package can also runs a check on you system (function: <em>setupGeolocation()</em>), detecting packages that are already on your computer and installs the missing tools directly from CRAN or GitHub.</p>
-<p>The package requires <em>devtools</em> (install if nessesary using the <em>install.packages()</em> function). With <em>devtools</em> on your system, you are able to download and built as well as install R packages directly from GitHub (e.g. <em>GeoLocTools</em>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;SLisovski/GeoLocTools&quot;</span>)</code></pre></div>
-<p>You are know able to load the package and run the <em>setupGeolocation()</em> function. We recommend to include this line at the beginning of each script you create for a geolocator analysis. Also check (every know and then), if there is a new version of <em>GeoLicTools</em> available. And if that is the case re-install the package using the same code you used for initial installation.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GeoLocTools)
-<span class="kw">setupGeolocation</span>()</code></pre></div>
-<p>if you see “You are all set!” in your console, the function ran succesfully and you are able to proceed.</p>
-<p>Amongst other dependencies, the following packages are loaded by this function:</p>
-<p>CRAN: geosphere, maptols, raster, MASS, rgdal</p>
-<p>GitHub: twGeos, GeoLight, probGLS, SGAT, FLightR</p>
+<div id="datasets" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> The Datasets</h1>
+<p>To illustrate the capabilities of the different packages, discuss the potential pitfalls and provide some recommendations, we will use raw geolocator data from three individuals of different species. The data is publised on Movebank @ref{movebank} and can be downloaded directly using the R package <em>move</em> (to be done and to be tested!).</p>
+<table>
+<thead>
+<tr class="header">
+<th>TagID</th>
+<th>Species</th>
+<th>Tag type</th>
+<th>Movebank information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M034</td>
+<td>Red-backed Shrike</td>
+<td>Integio (Movement Technology Ltd.)</td>
+<td>TBA</td>
+</tr>
+<tr class="even">
+<td>xxx</td>
+<td>European bee-eater</td>
+<td>PAM (Swiss Ornithological Institute)</td>
+<td>TAB</td>
+</tr>
+<tr class="odd">
+<td>xxx</td>
+<td>xx Bunting</td>
+<td>Eli</td>
+<td>TAB</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Differences</li>
+<li>Recording/measurement frequency</li>
+<li>Sensitivity</li>
+</ul>
 
 </div>
             </section>
@@ -154,8 +179,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="acknowledgements.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="datasets.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="start.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loadingData.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
