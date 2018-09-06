@@ -1,33 +1,59 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Loading data into R {#loadingData}
 
-here are a few functions to read light-level data from different tag types into R. The type of file that you have will determine which function you use. If you have `.lig` from British Antarctic Survey or BioTrack you use the `readLig` found in the `TwGeos` package. For the `GeoLight` and the `SGAT` analyses we will use a tag developed by the Swiss Ornithological Institute that was deployed on a Bee-eather in 2014/2015. For the `FLightR` analysis we will use recordings from an `Integio` logger developped by `Migrate Technology Ltd` that was deployed on a ...
+The first step is to load your raw data into R. Different geolocator types (e.g. from different manufacturers or different series) provide raw data in different formats. And while there are functions available to read a whole range of formats, you may have to eiter write your own function, use simple read text utilites or get in touch with the package managers to write code that fits your format if it is not yet implemented.
 
+The most frequently used geolocators provide files with the extention, .lux (Migrate Technology Ltd), .lig (BAS, Biotrack) or .glf (Swiss Ornithological Insitute). The functions `readMTlux`, `ligTrans` and `glfTrans` allows you to read these files. The documentations of the different packages may help to provide information on how to read other fiels (e.g. `?GeoLight`).
+
+
+>A short note on ***naming and saving of data files*** (final results and intermediate steps):
+>Notably, if you want to analyse a whole range of geolocator tracks (from different species or sites) and with different methods, we recommend to use a consistent naming convention. This helps to not loose the overview, but most importantly it allows to run the same code for saving and reading of data once you defined a set of metadata information. And while you may want to adjust to personal preference we also recommend to have a fixed and consistent folder structure for your analysis. E.g.:
+>
+>* RawData
+>* RCode
+>* Results
+>
+>In case of multi-species analysis we recommend to have species folders within those folders.
+
+
+We can then define metadata information on the individual, the species, as the deployment location.
 
 ```{r}
 ID <- "14SA"
-wd <- "Main"
 Species <- "MerApi"
-AnalCode <- "R1"
+wd <- "Data" # Subfolder of Analysis
 
 lon.calib <- 11.96
 lat.calib <- 51.32
+```
 
+By using the above metadata we can use the `paste0` command to include this information in reading and writing of files.
 
-raw <- glfTrans(paste0("Data/RawData/", Species, "/", ID, ".glf"))
+```{r}
+raw <- glfTrans(paste0(wd, "/RawData/", Species, "/", ID, ".glf"))
   names(raw) <- c("Date", "Light")
   raw$Light  <- log(raw$Light+0.0001) + abs(min(log(raw$Light+0.0001)))
 head(raw)
 ```
 
-No matter how the data is read in and what tag type has been used the output needs to have at least two columns (note that names can be slightly different):
+Adding to the confucion of different raw data types, the read functions also provide different output. However, the most important columns are,
 
-1. datetime
-2. light
+1. Date
+2. Light
 
-and these columns need to be in a specific format with datetime beeing a `POSIX.` class and light beeing numeric intergers.
+
+and these columns need to be in a specific format with Date beeing a `POSIX.` class and light beeing numeric intergers. Check with the following line of code:
 
 ```{r}
 str(raw)
 ```
 
-also note, that some ligth values should be log-transformed while some data is already on a log scale (e.g. .lig files).
+
+> Do I need to log-transform my raw light measurements?
+>
+> @ Eldar - please add!
+

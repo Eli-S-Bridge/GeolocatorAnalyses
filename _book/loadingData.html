@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Light-level geolocation analysis</title>
   <meta name="description" content="How to analyze light-level geolocator tracking data for studies of birds.">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Light-level geolocation analysis" />
   <meta property="og:type" content="book" />
@@ -106,7 +106,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sturcture-of-the-manual.html"><a href="sturcture-of-the-manual.html"><i class="fa fa-check"></i>Sturcture of the manual</a></li>
 <li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>1</b> Getting started</a></li>
+<li class="chapter" data-level="1" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>1</b> Getting started</a><ul>
+<li class="chapter" data-level="" data-path="which-package-should-i-choose.html"><a href="which-package-should-i-choose.html"><i class="fa fa-check"></i>Which package should I choose</a></li>
+</ul></li>
 <li class="chapter" data-level="2" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>2</b> The Datasets</a></li>
 <li class="chapter" data-level="3" data-path="loadingData.html"><a href="loadingData.html"><i class="fa fa-check"></i><b>3</b> Loading data into R</a></li>
 <li class="chapter" data-level="4" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>4</b> Twilight Annotation</a></li>
@@ -136,17 +138,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="loadingData" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Loading data into R</h1>
-<p>here are a few functions to read light-level data from different tag types into R. The type of file that you have will determine which function you use. If you have <code>.lig</code> from British Antarctic Survey or BioTrack you use the <code>readLig</code> found in the <code>TwGeos</code> package. For the <code>GeoLight</code> and the <code>SGAT</code> analyses we will use a tag developed by the Swiss Ornithological Institute that was deployed on a Bee-eather in 2014/2015. For the <code>FLightR</code> analysis we will use recordings from an <code>Integio</code> logger developped by <code>Migrate Technology Ltd</code> that was deployed on a …</p>
+<p>The first step is to load your raw data into R. Different geolocator types (e.g. from different manufacturers or different series) provide raw data in different formats. And while there are functions available to read a whole range of formats, you may have to eiter write your own function, use simple read text utilites or get in touch with the package managers to write code that fits your format if it is not yet implemented.</p>
+<p>The most frequently used geolocators provide files with the extention, .lux (Migrate Technology Ltd), .lig (BAS, Biotrack) or .glf (Swiss Ornithological Insitute). The functions <code>readMTlux</code>, <code>ligTrans</code> and <code>glfTrans</code> allows you to read these files. The documentations of the different packages may help to provide information on how to read other fiels (e.g. <code>?GeoLight</code>).</p>
+<blockquote>
+<p>A short note on <strong><em>naming and saving of data files</em></strong> (final results and intermediate steps): Notably, if you want to analyse a whole range of geolocator tracks (from different species or sites) and with different methods, we recommend to use a consistent naming convention. This helps to not loose the overview, but most importantly it allows to run the same code for saving and reading of data once you defined a set of metadata information. And while you may want to adjust to personal preference we also recommend to have a fixed and consistent folder structure for your analysis. E.g.:</p>
+<ul>
+<li>RawData</li>
+<li>RCode</li>
+<li>Results</li>
+</ul>
+<p>In case of multi-species analysis we recommend to have species folders within those folders.</p>
+</blockquote>
+<p>We can then define metadata information on the individual, the species, as the deployment location.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ID &lt;-<span class="st"> &quot;14SA&quot;</span>
-wd &lt;-<span class="st"> &quot;Main&quot;</span>
 Species &lt;-<span class="st"> &quot;MerApi&quot;</span>
-AnalCode &lt;-<span class="st"> &quot;R1&quot;</span>
+wd &lt;-<span class="st"> &quot;Data&quot;</span> <span class="co"># Subfolder of Analysis</span>
 
 lon.calib &lt;-<span class="st"> </span><span class="fl">11.96</span>
-lat.calib &lt;-<span class="st"> </span><span class="fl">51.32</span>
-
-
-raw &lt;-<span class="st"> </span><span class="kw">glfTrans</span>(<span class="kw">paste0</span>(<span class="st">&quot;Data/RawData/&quot;</span>, Species, <span class="st">&quot;/&quot;</span>, ID, <span class="st">&quot;.glf&quot;</span>))
+lat.calib &lt;-<span class="st"> </span><span class="fl">51.32</span></code></pre></div>
+<p>By using the above metadata we can use the <code>paste0</code> command to include this information in reading and writing of files.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">raw &lt;-<span class="st"> </span><span class="kw">glfTrans</span>(<span class="kw">paste0</span>(wd, <span class="st">&quot;/RawData/&quot;</span>, Species, <span class="st">&quot;/&quot;</span>, ID, <span class="st">&quot;.glf&quot;</span>))
   <span class="kw">names</span>(raw) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Date&quot;</span>, <span class="st">&quot;Light&quot;</span>)
   raw<span class="op">$</span>Light  &lt;-<span class="st"> </span><span class="kw">log</span>(raw<span class="op">$</span>Light<span class="op">+</span><span class="fl">0.0001</span>) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(<span class="kw">min</span>(<span class="kw">log</span>(raw<span class="op">$</span>Light<span class="op">+</span><span class="fl">0.0001</span>)))
 <span class="kw">head</span>(raw)</code></pre></div>
@@ -157,17 +168,20 @@ raw &lt;-<span class="st"> </span><span class="kw">glfTrans</span>(<span class="
 ## 4 2015-07-10 00:15:00     0
 ## 5 2015-07-10 00:20:00     0
 ## 6 2015-07-10 00:25:00     0</code></pre>
-<p>No matter how the data is read in and what tag type has been used the output needs to have at least two columns (note that names can be slightly different):</p>
+<p>Adding to the confucion of different raw data types, the read functions also provide different output. However, the most important columns are,</p>
 <ol style="list-style-type: decimal">
-<li>datetime</li>
-<li>light</li>
+<li>Date</li>
+<li>Light</li>
 </ol>
-<p>and these columns need to be in a specific format with datetime beeing a <code>POSIX.</code> class and light beeing numeric intergers.</p>
+<p>and these columns need to be in a specific format with Date beeing a <code>POSIX.</code> class and light beeing numeric intergers. Check with the following line of code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(raw)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    112161 obs. of  2 variables:
 ##  $ Date : POSIXct, format: &quot;2015-07-10 00:00:00&quot; &quot;2015-07-10 00:05:00&quot; ...
 ##  $ Light: num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
-<p>also note, that some ligth values should be log-transformed while some data is already on a log scale (e.g. .lig files).</p>
+<blockquote>
+<p>Do I need to log-transform my raw light measurements?</p>
+<p>@ Eldar - please add!</p>
+</blockquote>
 
 </div>
             </section>

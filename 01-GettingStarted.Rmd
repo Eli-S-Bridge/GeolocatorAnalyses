@@ -16,11 +16,32 @@ library(GeoLocTools)
 setupGeolocation()
 ``` 
 
-if you see "You are all set!" in your console, the function ran succesfully and you are able to proceed.
+The function returns "You are all set!" if it ran succesfully.
 
-Amongst other dependencies, the following packages are loaded by this function:
 
-CRAN: geosphere, maptols, raster, MASS, rgdal
+Amongst other dependencies, the following geolocator specific packages are  loaded by this function:
 
-GitHub: twGeos, GeoLight, probGLS, SGAT, FLightR
+* twGeos
+* GeoLight
+* probGLS
+* SGAT
+* FLightR
 
+
+## Which package should I choose {-}
+
+A geolocator analysis usually consists of three major steps. The first one, after downloading the data, is the annotation of twilight times, e.g. defining sunrise and sunset events using a light intensity threshold (go to [Twilight Annotation](#twilight)). Next, most users are interested in a first look at the results using a simple threshold method (e.g. in _GeoLight_ or _SGAT_). Depending on the question in min and the quality of the data, one can try to refine the location estimates using additional prior informaiton (such as speed distributions and spatial masks). This can be done using _propGLS_, _SGAT_ and _FLightR_.
+
+
+> **GeoLight** uses the threshold model to determine locations. Unlike the other packages described below, GeoLight doesn't include a movement model and relies solely on the light-level data (Lisovski et al. 2012). However, the package provides tools for simple movement analysis, alternative location estimations (e.g. maximum likelihood approaches), and plotting utilities. GeoLight has been under constant development and new functionalities are added frequently, e.g. `siteEstimate` (Hiemer  et al. 2018). 
+Go to [GeoLight](#GeoLight)
+> 
+> **probGLS** .... 
+> Go to [probGLS](#probGLS)
+> 
+> **SGAT** pronounced "tags backwards" can be run using a curve method (e.g. using the slope if the increasing and decresing light during twilight periods) but also uses the threshold method (e.g. using single twilight events). The method uses an MCMC simulation to refine location estimates and positions are estimated based on 1) the observed difference between known twilights and twilights recorded by the unit, 2) a movement model and 3) a spatial mask. The positions are estimated within a Bayesian framework and it is relatively easy to implement own ideas (e.g. special masks or bimodal movement behavior). In this manual, we also describe the so called `group Model`that has been proven to be a good model for many migratory songbirds since it increases accuracy and precision of stationary sites (Dhanjal-Adams et al. 2018). Of all the described packages, SGAT is the most coding intensive method.
+Go to [SGAT](#SGAT)
+> 
+> **FLightR** uses a movement model, the relationship between observed and expected light-levels and implements a particle filter to estimate locations. Of the three packages FLightR is the most computationally intense method and running the final model takes hours to complete. Yet if the data quality is good it has proven to be the be very accurate (Rakhimberdiev et al. 2016). FLightR works best with data recorded from tags that record a wide spectrum of light intensities with high frequency (2-5 min), resulting in multible recordings of light during the twilight periods. More information about the underlying model can be found in (Rakhimberdiev et al. 2015).  
+Go to [FLightR](#FLightR)
+> 
