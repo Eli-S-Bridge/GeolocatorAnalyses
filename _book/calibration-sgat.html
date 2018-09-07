@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Light-level geolocation analysis</title>
+  <meta name="description" content="How to analyze light-level geolocator tracking data for studies of birds.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Light-level geolocation analysis" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="Images/front.png" />
+  <meta property="og:description" content="How to analyze light-level geolocator tracking data for studies of birds." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Light-level geolocation analysis" />
+  
+  <meta name="twitter:description" content="How to analyze light-level geolocator tracking data for studies of birds." />
+  <meta name="twitter:image" content="Images/front.png" />
+
+<meta name="author" content="Simeon Lisovski, Martins Briedis, Kiran Danjahl-Adams, Lykke Pedersen, Sarah Davidson, …, Michael T. Hallworth, Michael Sumner, Simon Wotherspoon, Eli Bridge (201X) The Nuts and Bolts of Light-Level Geolocation Analyses. Journal X:xxx-xxx. DOI:00000.00">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="SGAT.html">
+<link rel="next" href="alternative-hill-ekstrom-calibration.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Light-level geolocation analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="sturcture-of-the-manual.html"><a href="sturcture-of-the-manual.html"><i class="fa fa-check"></i>Sturcture of the manual</a></li>
+<li class="chapter" data-level="" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>1</b> Getting started</a><ul>
+<li class="chapter" data-level="" data-path="which-package-should-i-choose.html"><a href="which-package-should-i-choose.html"><i class="fa fa-check"></i>Which package should I choose</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>2</b> The Datasets</a></li>
+<li class="chapter" data-level="3" data-path="loadingData.html"><a href="loadingData.html"><i class="fa fa-check"></i><b>3</b> Loading data into R</a></li>
+<li class="chapter" data-level="4" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>4</b> Twilight Annotation</a><ul>
+<li class="chapter" data-level="" data-path="cleaningfiltering-twilight-times.html"><a href="cleaningfiltering-twilight-times.html"><i class="fa fa-check"></i>Cleaning/Filtering twilight times</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="GeoLight.html"><a href="GeoLight.html"><i class="fa fa-check"></i><b>5</b> GeoLight</a></li>
+<li class="chapter" data-level="6" data-path="probGLS.html"><a href="probGLS.html"><i class="fa fa-check"></i><b>6</b> probGLS</a></li>
+<li class="chapter" data-level="7" data-path="SGAT.html"><a href="SGAT.html"><i class="fa fa-check"></i><b>7</b> SGAT</a><ul>
+<li class="chapter" data-level="7.1" data-path="calibration-sgat.html"><a href="calibration-sgat.html"><i class="fa fa-check"></i><b>7.1</b> Calibration (SGAT)</a></li>
+<li class="chapter" data-level="7.2" data-path="alternative-hill-ekstrom-calibration.html"><a href="alternative-hill-ekstrom-calibration.html"><i class="fa fa-check"></i><b>7.2</b> Alternative - Hill-Ekstrom Calibration</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="FLightR.html"><a href="FLightR.html"><i class="fa fa-check"></i><b>8</b> FLightR</a></li>
+<li class="chapter" data-level="9" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>9</b> Presentation of results</a></li>
+<li class="chapter" data-level="10" data-path="movebank.html"><a href="movebank.html"><i class="fa fa-check"></i><b>10</b> Movebank</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Light-level geolocation analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="calibration-sgat" class="section level2">
+<h2><span class="header-section-number">7.1</span> Calibration (SGAT)</h2>
+<p>See general introduction and discusssion on calibration: @ref{calibration}.</p>
+<p>Calibration for the <em>SGAT</em> process is similar to the calibration perfomed in the <em>GeoLight</em> analysis. Both, the <em>zero</em> and the <em>median</em> sun elevation angles, as well as the parameters for the error distribution of the twiligth times is crucial for the analysis. <strong>However</strong>, while we use sun elevation angles in <em>GeoLight</em> we need the <strong>zenith</strong> angle in <em>SGAT</em>. The difference is trivial; sun elevation angle refers to the deviation of the sun relative to the horizon, whereas the zenith angle refers to the deviation from the zenith. Thus, civil twilight is defined as the time when the sun elevation angle is -6 degrees which equals a zenith angle of 96 degrees.</p>
+<p>The simple conversion of sun elevation angle to zenith angle is:</p>
+<p><span class="math display">\[zenith = 90 - sun elevation angle\]</span></p>
+<p>There are multible ways to define the time period for calibration. Best is certainly if you know when the individual left the deployment site and if there where a couple of weeks between deployment and departure. In many instances the departure date (or the arrival to the retrieval site) is unknown. The <code>lightImage</code> together with the <code>tsimageDeploymentLine</code>can help to define suitable period (the right time period can be optimized by changing the date in the <code>tm.calib</code> vector and plotting the lines over and over again until you are sure that you have selected the beginning and the end of the calibration period). Again, the longer the period the better, but periods that are influenced by e.g. breeding in nest boxes or by movements should be excluded.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lightImage</span>( <span class="dt">tagdata =</span> raw,
+            <span class="dt">offset =</span> offset,     
+            <span class="dt">zlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">20</span>))
+
+<span class="kw">tsimageDeploymentLines</span>(twl<span class="op">$</span>Twilight, lon.calib, lat.calib, offset, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>)
+
+tm.calib &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="kw">c</span>(<span class="st">&quot;2015-07-20&quot;</span>, <span class="st">&quot;2015-08-29&quot;</span>), <span class="dt">tz =</span> <span class="st">&quot;GMT&quot;</span>)
+<span class="kw">abline</span>(<span class="dt">v =</span> tm.calib, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;orange&quot;</span>)</code></pre></div>
+<p><img src="Light-level_geolocation_analysis_files/figure-html/unnamed-chunk-17-1.svg" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d_calib &lt;-<span class="st"> </span><span class="kw">subset</span>(twl, Twilight<span class="op">&gt;=</span>tm.calib[<span class="dv">1</span>] <span class="op">&amp;</span><span class="st"> </span>Twilight<span class="op">&lt;=</span>tm.calib[<span class="dv">2</span>])</code></pre></div>
+<p>Using the calibation subset of the <em>twl</em> table we can perform the calibration:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calib &lt;-<span class="st"> </span><span class="kw">thresholdCalibration</span>(d_calib<span class="op">$</span>Twilight, d_calib<span class="op">$</span>Rise, lon.calib, lat.calib, <span class="dt">method =</span> <span class="st">&quot;gamma&quot;</span>)</code></pre></div>
+<p><img src="Light-level_geolocation_analysis_files/figure-html/unnamed-chunk-18-1.svg" width="672" /></p>
+<p>This is how a calibration time series should look like. Based in theory it should follow a gamma or a log-normal distribution (both can be used in <em>SGAT</em>). What we can see, is that the recorded twilight times most frequently deviation approx. 12 minutes. However, deviations of up to 50 minutes have been recorded. For the following analysis, we need the zenith angle for both the zero deviation (0, and second number in return vector e.g. <code>calib[2]</code>) and the most frequent <em>median</em> deviation (1, and the first number in the return vector e.g. <code>calib[1]</code>). Additionally we need the parameters of the error distribution (<code>alpha</code> parameters, e.g. <code>calib[3:4]</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zenith  &lt;-<span class="st"> </span>calib[<span class="dv">1</span>]
+zenith0 &lt;-<span class="st"> </span>calib[<span class="dv">2</span>]
+
+alpha &lt;-<span class="st">   </span>calib[<span class="dv">3</span><span class="op">:</span><span class="dv">4</span>]</code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="SGAT.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="alternative-hill-ekstrom-calibration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Light-level geolocation analysis.pdf", "Light-level geolocation analysis.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

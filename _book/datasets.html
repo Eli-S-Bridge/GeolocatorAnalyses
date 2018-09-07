@@ -111,13 +111,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>2</b> The Datasets</a></li>
 <li class="chapter" data-level="3" data-path="loadingData.html"><a href="loadingData.html"><i class="fa fa-check"></i><b>3</b> Loading data into R</a></li>
-<li class="chapter" data-level="4" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>4</b> Twilight Annotation</a></li>
+<li class="chapter" data-level="4" data-path="twilight.html"><a href="twilight.html"><i class="fa fa-check"></i><b>4</b> Twilight Annotation</a><ul>
+<li class="chapter" data-level="" data-path="cleaningfiltering-twilight-times.html"><a href="cleaningfiltering-twilight-times.html"><i class="fa fa-check"></i>Cleaning/Filtering twilight times</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="GeoLight.html"><a href="GeoLight.html"><i class="fa fa-check"></i><b>5</b> GeoLight</a></li>
 <li class="chapter" data-level="6" data-path="probGLS.html"><a href="probGLS.html"><i class="fa fa-check"></i><b>6</b> probGLS</a></li>
-<li class="chapter" data-level="7" data-path="SGAT.html"><a href="SGAT.html"><i class="fa fa-check"></i><b>7</b> SGAT</a></li>
+<li class="chapter" data-level="7" data-path="SGAT.html"><a href="SGAT.html"><i class="fa fa-check"></i><b>7</b> SGAT</a><ul>
+<li class="chapter" data-level="7.1" data-path="calibration-sgat.html"><a href="calibration-sgat.html"><i class="fa fa-check"></i><b>7.1</b> Calibration (SGAT)</a></li>
+<li class="chapter" data-level="7.2" data-path="alternative-hill-ekstrom-calibration.html"><a href="alternative-hill-ekstrom-calibration.html"><i class="fa fa-check"></i><b>7.2</b> Alternative - Hill-Ekstrom Calibration</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="FLightR.html"><a href="FLightR.html"><i class="fa fa-check"></i><b>8</b> FLightR</a></li>
 <li class="chapter" data-level="9" data-path="presentation.html"><a href="presentation.html"><i class="fa fa-check"></i><b>9</b> Presentation of results</a></li>
-<li class="chapter" data-level="10" data-path="movebank.html"><a href="movebank.html"><i class="fa fa-check"></i><b>10</b> Movemebank</a></li>
+<li class="chapter" data-level="10" data-path="movebank.html"><a href="movebank.html"><i class="fa fa-check"></i><b>10</b> Movebank</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -223,6 +228,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

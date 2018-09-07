@@ -35,7 +35,7 @@ lightImage( tagdata = raw, # light data
 offset = offset,     
 zlim = c(0, 20)) # y axis
 
-addTwilightLine(lon = lon.calib, lat = lat.calib, zenith = 96)
+# addTwilightLine(lon = lon.calib, lat = lat.calib, zenith = 96)
 ``` 
 
 
@@ -111,3 +111,26 @@ The result of this first part that is **independent** of which package/analysis 
 ```{r}
 head(twl[,c(1,2)])
 ```
+
+
+## Cleaning/Filtering twilight times {-}
+
+Automated filtering of twilight times should be handeled carefully. There is no _perfect_ function that cleans your twilight file. However, `twilightEdit` can help to filter and remove (mark them as deleted) outliers (e.g. false twiligths). The filtering and removing of twilight times is based on a set of rules:
+
+1) if a twilight time is e.g. 45 minutes (**outlier.mins**) different to its surrounding twilight times, and these sourrounding twilight times are within a certain range of minutes (**stationary.mins**), then the twiligth times will be adjusted to the median of the sourrounding twilights.
+2) if a twilight time is e.g. 45 minutes (**outlier.mins**) different to its surrounding twilight times, but the sourrounding twilight times are more variable then you would expect them to bee if they were recorded during stationary behavior, then the twiligth time will be marked as deleted.
+
+The argument **windows** defines the number of twilight times sourrounding the twilight in focus (e.g. same as in conventional moving window methods).
+
+```{r, fig.height=6, fig.width=10}
+twl <- twilightEdit(twilights = twl,
+                    offset = offset,
+                    window = 4,           # two days before and two days after
+                    outlier.mins = 45,    # difference in mins
+                    stationary.mins = 25, # are the other surrounding twilights within 25 mins of one another
+                    plot = TRUE)
+```
+
+In this particualar case and with the paramters, four twilight times have been corrected. Based on the output, you can also exlude them for further analysis. While you can also save the output file, we recomment to archive the twiligth file from above and redo the `twilightEdit`after reading in the archived twiligth file from above.
+
+> Important: This method helps to adjust and remove twilight times that are either outliers, false twiligths given a set of rules. While subjective to a certain degree as well as repdroducabel, the method may not be able to detect all false twiligth times and may even remove correct entries during fast migration periods.

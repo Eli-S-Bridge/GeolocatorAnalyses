@@ -1,8 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 # Loading data into R {#loadingData}
 
 The first step is to load your raw data into R. Different geolocator types (e.g. from different manufacturers or different series) provide raw data in different formats. And while there are functions available to read a whole range of formats, you may have to eiter write your own function, use simple read text utilites or get in touch with the package managers to write code that fits your format if it is not yet implemented.
