@@ -1,0 +1,157 @@
+--- 
+title: "Light-level geolocation analysis"
+author: "Simeon Lisovski, Martins Briedis, Kiran Danjahl-Adams, Lykke Pedersen, Sarah Davidson, ..., Michael T. Hallworth, Michael Sumner, Simon Wotherspoon, Eli Bridge (201X) The Nuts and Bolts of Light-Level Geolocation Analyses. Journal X:xxx-xxx. DOI:00000.00"
+knit: "bookdown::render_book"
+documentclass: krantz
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+fontsize: 12pt
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+site: bookdown::bookdown_site
+description: "How to analyze light-level geolocator tracking data for studies of birds."
+cover-image: Images/front.png
+---
+
+# Preface {-}
+
+Placeholder
+
+
+## Sturcture of the manual {-}
+## Acknowledgements {-}
+
+<!--chapter:end:index.Rmd-->
+
+
+# Getting started {#start}
+
+Placeholder
+
+
+## Which package should I choose {-}
+
+<!--chapter:end:01-GettingStarted.Rmd-->
+
+# The Datasets {#datasets}
+
+To illustrate the capabilities of the different packages, discuss the potential pitfalls and provide some recommendations, we will use raw geolocator data from three individuals of different species.
+The data is publised on Movebank \@ref{movebank} and can be downloaded directly using the R package _move_ (to be done and to be tested!).
+
+TagID   |  Species           |   Tag type                            | Movebank information
+------  | ---------          | -----------------------------------   | ---------------------
+M034    | Red-backed Shrike  | Integio (Movement Technology Ltd.)    | TBA
+xxx     | European bee-eater | PAM (Swiss Ornithological Institute)  | TAB
+xxx     | xx Bunting         | Eli                                   | TAB
+
+* Differences
+* Recording/measurement frequency
+* Sensitivity
+
+<!--chapter:end:02-Datasets.Rmd-->
+
+
+# Loading data into R {#loadingData}
+
+Placeholder
+
+
+
+<!--chapter:end:03-LoadingData.Rmd-->
+
+
+# Twilight Annotation {#twilight}
+
+Placeholder
+
+
+## Cleaning/Filtering twilight times {-}
+
+<!--chapter:end:04-TwilightAnnotation.Rmd-->
+
+# GeoLight {#GeoLight}
+
+<!--chapter:end:06-GeoLight.Rmd-->
+
+# probGLS {#probGLS}
+
+<!--chapter:end:07-probGLS.Rmd-->
+
+---
+title: "SGAT"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# SGAT {#SGAT}
+
+General introduction...
+
+
+> Experience and Recommendations
+
+
+To illustrate the _SGAT_ analysis, we use the European bee-eater dataset. The light intensities were recorded by a geolocator from the Swiss Ornithological Insitute, measuring light every xx minutes writing the mean of every xx measurements.
+
+We first define the metadata and read in the raw recordings. We skip the twilight definition process but read in the twiligth file that has been generated using `preprocessLight`. Note: it is required to retransform the Twilight column into the `POSIXc`format.
+
+```{r, warning=FALSE}
+ID <- "14SA"
+wd <- "Data"
+Species <- "MerApi"
+
+lon.calib <- 11.96
+lat.calib <- 51.32
+
+raw <- glfTrans(paste0(wd, "/RawData/", Species, "/", ID, ".glf"))
+  names(raw) <- c("Date", "Light")
+  raw$Light  <- log(raw$Light+0.0001) + abs(min(log(raw$Light+0.0001)))
+  
+twl <- read.csv(paste0(wd, "/Results/", Species, "/", ID, "_twl.csv"))
+  twl$Twilight <- as.POSIXct(twl$Twilight, tz = "GMT")
+  twl <- twl[!twl$Deleted,]
+  
+raw <- subset(raw, Date>=min(twl$Twilight) & Date<=max(twl$Twilight)) # clipping raw data to relevant extent  
+```
+
+We can have a look into the data using the `lightImage` function from the `TwGeos` package:
+
+```{r}
+offset <- 12 # adjusts the y-axis to put night (dark shades) in the middle
+
+lightImage( tagdata = raw,
+            offset = offset,     
+            zlim = c(0, 20))
+
+tsimagePoints(twl$Twilight, offset = offset, pch = 16, cex = 1.2,
+              col = ifelse(twl$Rise, "firebrick", "cornflowerblue"))
+```
+
+<!--chapter:end:08-SGAT.Rmd-->
+
+# FLightR {#FLightR}
+
+<!--chapter:end:09-FLightR.Rmd-->
+
+# Presentation of results {#presentation}
+
+<!--chapter:end:10-presentation.Rmd-->
+
+# Movebank {#movebank}
+
+<!--chapter:end:11-movebank.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:12-references.Rmd-->
+

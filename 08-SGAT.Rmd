@@ -1,7 +1,13 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # SGAT {#SGAT}
 
 General introduction...
 
+Hellloooooo!!!
 
 > Experience and Recommendations
 
