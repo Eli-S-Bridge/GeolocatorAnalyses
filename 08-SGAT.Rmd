@@ -7,7 +7,6 @@ editor_options:
 
 General introduction...
 
-Hellloooooo!!!
 
 > Experience and Recommendations
 
@@ -59,7 +58,9 @@ The simple conversion of sun elevation angle to zenith angle is:
 
 $$zenith = 90 - sun elevation angle$$
 
-There are multible ways to define the time period for calibration. Best is certainly if you know when the individual left the deployment site and if there where a couple of weeks between deployment and departure. In many instances the departure date (or the arrival to the retrieval site) is unknown. The `lightImage` together with the `tsimageDeploymentLine`can help to define suitable period (the right time period can be optimized by changing the date in the `tm.calib` vector and plotting the lines over and over again until you are sure that you have selected the beginning and the end of the calibration period). Again, the longer the period the better, but periods that are influenced by e.g. breeding in nest boxes or by movements should be excluded.
+There are multible ways to define the time period for calibration. Best is to know when the individual left the deployment site and if there where a couple of weeks between deployment and departure. In many instances the departure date (or the arrival to the retrieval site) is unknown. The `lightImage` together with the `tsimageDeploymentLine` can help to define suitable period (the right time period can be optimized by changing the date in the `tm.calib` vector and plotting the lines over and over again until you are sure that you have selected the beginning and the end of the calibration period). Again, the longer the period the better, but periods that are influenced by e.g. breeding in nest boxes or by movements should be excluded.
+
+More specifically, `lightImage` visually presents night (in black) and day (white) throughout the year. This allows us to see when changes in night length occur and thus when the bird has moved. Based on this, we can identify when the bird left the deployment site and manually specify these for `tm.calib` .
 
 ```{r}
 lightImage( tagdata = raw,
@@ -93,17 +94,25 @@ alpha <-   calib[3:4]
 ### Alternative - Hill-Ekstrom Calibration
 
 
-For the bee eaters and many other species the breeding season that is often also were the loggers are delpoyed is a very speciel period during which the birds use different habitats and show different behaviors. This is of course suboptimal for calibration since it would lead to good estimates for the breeding grounds when we knwo the exact location and biased estimates for the rest of the year. We can therefore try and estimate an alternative zenith angle based in the Hill-Ekstrom theory that the rigth zenith anlge should lead to the lowest variance in latitude estimates during stationary periods. And the latter is most pronounced around the equinox. The following bits of code draws a basic path and then compares different zeniths to find the one with the lowest variation. It then uses that new zenith with the least sd in the threshold model.
+For the bee eaters and many other species, the breeding season is often also when the loggers are delpoyed, but is a very special period because the birds use different habitats and show different behaviors compared to the rest of the annual cycle. For instance, bee eaters use burrows during the breeding season, but not during the rest of the year. This is of course suboptimal for calibration since it would lead to good estimates for the breeding grounds when we know the exact location, and biased estimates of sunrise and sunset for the rest of the year. We can therefore try and estimate an alternative zenith angle based in the Hill-Ekstrom theory that the rigth zenith anlge should lead to the lowest variance in latitude estimates (i.e. flattest) during stationary periods. And the latter is most pronounced around the equinox. The following bits of code draw a basic path and then compare different zeniths to find the one with the lowest variation. It then uses that new zenith with the least sd in the threshold model.
 
-In the `findHEZenith`function, the `tol` argument defines how many locations shoudl be linearly interpolated around the equinox. Large values lead to larger periods with interpolated values. For this type of calibration it makes sense to play with this value but in general it is recommended to set it to a low value (e.g. 0.08). If the tracked individual has been stationary during the time of the equinox this period provides the best data for the Hill-Ekstrom calibration.
+In the `findHEZenith`function, the `tol` argument defines how many locations should be linearly interpolated around the equinox. Large values lead to larger periods with interpolated values. For this type of calibration it makes sense to play with this value but in general it is recommended to set it to a low value (e.g. 0.08). If the tracked individual has been stationary during the time of the equinox this period provides the best data for the Hill-Ekstrom calibration.
 
 ```{r, fig.width=6, fig.height=8}
-(zenith_sd <- findHEZenith(twl, tol=0.01, range=c(300,550)))
+startDate = "2015-12-12"
+endDate = "2016-04-15"
+  
+start = min(which(as.Date(twl$Twilight) == startDate))
+end = max(which(as.Date(twl$Twilight) == endDate))
+
+(zenith_sd <- findHEZenith(twl, tol=0.01, range=c(start,end)))
 ```
 
-The top panel shows the entire path (latitude) using different zenith angles with the black line indicating the latiude estimates with the smalles variation within the specified range (in between the two blue dashed lines). One need to be quite sure that the individual did not move during this period. The lower panes shows the actual variation for each across a range of zenith angles. It is good if one can see a clear minimum in this curve.
+The top panel shows the entire path (latitude) using different zenith angles with the black line indicating the latiude estimates with the smallest variation within the specified range (in between the two blue dashed lines). One needs to be quite sure that the individual did not move during this period. The lower pane shows the actual variation in latitudes across a range of zenith angles. It is good if one can see a clear minimum in this curve.
 
-In this case, there is no real diffrence between the two calibrations. If a difference will be detected (>0.5 degrees), one should consider to adjust the zenith angles calculated from the breeding site.
+>> play around with the range. For instance look what happens when the `endDate` is changed to "2016-01-15". This is not what you want - there is no clear u-shape in the bottom panel and the latitude during stationary non-breeding period in the top panel is very curved, not flat. In such cases, it's important to increase the range to cover some of the equinox period which is the most noisy. In some cases it can even be worth using the `mergeSites` function from the `GeoLight` package to find stationary sites to use in the Hill-Ekstrom calibration.
+
+In this case, there is no real difference between the two calibrations. If a difference will be detected (>0.5 degrees), one should consider adjusting the zenith angles calculated from the breeding site.
 
 ```{r}
 zenith  <- zenith + abs(zenith0-zenith_sd)
@@ -142,7 +151,7 @@ box()
 
 ## Define known locations
 
-For many tracks we know at least one location - the starting point at the deployment site. We can set this location and the sampler in the MCMC simulation will be instructed to keep these locations fixed. In this case we also know that the bird flew back to the same location so we can also fix the last couple of twilight times. Theoretically, if a bird was observed during the year, any twiligth time can be fixed of the location is known.
+For many tracks we know at least one location - the starting point at the deployment site. We can set this location and the sampler in the MCMC simulation will be instructed to keep these locations fixed. In this case we also know that the bird flew back to the same location, and that the geolocator was still measuring light when this happened, then we can also fix the last couple of twilight times. Theoretically, if a bird was observed during the year, any twiligth time can be fixed of the location is known.
 
 
 ```{r}
